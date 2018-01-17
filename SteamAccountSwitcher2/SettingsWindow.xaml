@@ -5,9 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SteamAccountSwitcher2"
         mc:Ignorable="d"
-        Title="Settings" Height="314" Width="400" Icon="images/gear.png" MinWidth="400" MinHeight="300" Closing="Window_Closing" WindowStartupLocation="CenterOwner">
-    <Grid>
-        <TabControl Margin="5,5,5,5">
+        Title="Settings" Height="338" Width="420" Icon="images/gear.png" MinWidth="420" MinHeight="338" Closing="Window_Closing" WindowStartupLocation="CenterOwner" MaxHeight="338" MaxWidth="420" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <Window.Resources>
+        <Style x:Key="TextBlockStyle1" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="TextTrimming" Value="None"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-27" Height="336" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="316*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <TabControl Margin="5,5,5,10">
             <TabItem Header="General">
                 <Grid>
                     <GroupBox Margin="5,5,5,0" FontSize="11" FontWeight="Bold"
@@ -19,11 +30,18 @@
                             <Button x:Name="buttonBrowseSteamInstallDir" Content="Browse" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70" Height="23" Click="buttonBrowseSteamInstallDir_Click"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Margin="5,92,5,0" FontSize="11" FontWeight="Bold"
-                    Height="102" VerticalAlignment="Top">
+                    <GroupBox Margin="5,89,5,0" FontSize="11" FontWeight="Bold" Height="49" VerticalAlignment="Top">
                         <GroupBox.Header>AutoStart</GroupBox.Header>
                         <Grid Margin="5">
-                            <TextBlock FontSize="12" FontWeight="Regular" TextWrapping="WrapWithOverflow"><Run Text="Set AutoStart "/></TextBlock>
+                            <TextBlock FontSize="12" FontWeight="Regular" TextWrapping="WrapWithOverflow" Height="18" VerticalAlignment="Top" IsEnabled="False" Opacity="0.5"><Run Text="Set AutoStart "/></TextBlock>
+                            <GroupBox Margin="-11,35,-11,-127" FontSize="11" FontWeight="Bold"
+                                Height="110" VerticalAlignment="Top">
+                                <GroupBox.Header>AutoAuth - Ａ Ｌ Ｐ Ｈ Ａ</GroupBox.Header>
+                                <StackPanel HorizontalAlignment="Left" Height="78" Margin="4,7,0,0" VerticalAlignment="Top" Width="360">
+                                    <CheckBox x:Name="autoAuthToggle" Content="Only require Steam Guard Code first time logging into account" Width="360" FontWeight="Medium" Margin="0,0,-282,0" Height="15" Padding="3,0,0,0" HorizontalAlignment="Left"/>
+                                    <TextBlock Height="53" TextWrapping="Wrap" Text="Sets a registry value before logging in with new account that allows a user who has previously entered a Steam Guard Code to login without another.  Effectively makes the the &quot;Remember Me&quot; checkbox persistent between multiple account logins." RenderTransformOrigin="0.498,0.447" Margin="5" FontWeight="Normal" FontSize="10" Style="{DynamicResource TextBlockStyle1}"/>
+                                </StackPanel>
+                            </GroupBox>
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -54,13 +72,13 @@
                         <Grid Margin="5">
                             <StackPanel>
                                 <CheckBox x:Name="safeModeToggle" Content="Use SafeMode" FontWeight="Medium" />
-                                <TextBlock FontSize="10" FontWeight="Normal" TextWrapping="Wrap" Margin="5">SafeMode uses different login method that doesn't expose your password in the task manager. It is slower and you cannot move your mouse during login!</TextBlock>
+                                <TextBlock FontSize="10" FontWeight="Normal" TextWrapping="Wrap" Margin="5" Style="{DynamicResource TextBlockStyle1}">SafeMode uses different login method that doesn't expose your password in the task manager. It is slower and you cannot move your mouse during login!</TextBlock>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Details" />
+            <TabItem Header="Details" Opacity="0" />
 
 
         </TabControl>

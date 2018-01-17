@@ -30,10 +30,9 @@ namespace SteamAccountSwitcher2
         public Steam steam;
         AccountLoader loader;
         bool autosaveAccounts = true;
+
         public MainWindow()
         {
-            AutoUpdater.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US"); //Workaround for horrible AutoUpdater translations :D
-            AutoUpdater.Start("http://wedenig.org/SteamAccountSwitcher/version.xml");
 
             InitializeComponent();
             //statusBarLabel.Content = AppDomain.CurrentDomain.BaseDirectory; //Debug location
@@ -90,7 +89,7 @@ namespace SteamAccountSwitcher2
                 }
                 catch
                 {
-                    MessageBox.Show("Account file is currupted or wrong encryption method is set. Check Settings and try again. AutoSave has been disabled so that nothing can be overwritten! Make sure to restart the applications after switching Encryption method!", "Error parsing file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("Account file is corrupted or wrong encryption method is set. Check Settings and try again. AutoSave has been disabled so that nothing can be overwritten! Make sure to restart the applications after switching Encryption method!", "Error parsing file", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     accountList = new ObservableCollection<SteamAccount>();
                     autosaveAccounts = false;
                 }
@@ -112,8 +111,7 @@ namespace SteamAccountSwitcher2
             itemContainerStyle.Setters.Add(new Setter(HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch));
             listBoxAccounts.ItemContainerStyle = itemContainerStyle;
         }
-
-
+        
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow settingsWindow = new SettingsWindow();
@@ -186,7 +184,11 @@ namespace SteamAccountSwitcher2
             try
             {
                 SteamAccount selectedAcc = (SteamAccount)listBoxAccounts.SelectedItem;
-                if (Properties.Settings.Default.safemode)
+                if (Properties.Settings.Default.autoAuth)
+                {
+                    steam.StartSteamAccountAutoAuth(selectedAcc);
+                }
+                else if (Properties.Settings.Default.safemode)
                 {
                     steam.StartSteamAccountSafe(selectedAcc);
                     Mouse.OverrideCursor = Cursors.Wait;
@@ -249,5 +251,7 @@ namespace SteamAccountSwitcher2
         {
             listContextMenuEdit_Click(sender, e);
         }
+
+
     }
 }

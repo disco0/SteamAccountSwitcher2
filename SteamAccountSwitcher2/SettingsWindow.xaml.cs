@@ -31,7 +31,7 @@ namespace SteamAccountSwitcher2
             InitializeComponent();
 
             textSteamInstallDir.Text = Properties.Settings.Default.steamInstallDir;
-
+            autoAuthToggle.IsChecked = Properties.Settings.Default.autoAuth;
             //Initialize Settings
             try
             {
@@ -53,15 +53,17 @@ namespace SteamAccountSwitcher2
                 radioButtonPasswordEnc.IsChecked = false;
                 radioButtonPasswordEnc.IsEnabled = false;
             }
-
+            bool autoAuth = Properties.Settings.Default.autoAuth;
             bool safemode = Properties.Settings.Default.safemode;
             safeModeToggle.IsChecked = safemode;
+            autoAuthToggle.IsChecked = autoAuth;
 
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.safemode = safeModeToggle.IsChecked.Value;
+            Properties.Settings.Default.autoAuth = autoAuthToggle.IsChecked.Value;
         }
 
         private void buttonBrowseSteamInstallDir_Click(object sender, RoutedEventArgs e)
@@ -74,5 +76,6 @@ namespace SteamAccountSwitcher2
                 textSteamInstallDir.Text = Properties.Settings.Default.steamInstallDir;
             }
         }
+        
     }
 }

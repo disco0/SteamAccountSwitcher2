@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:SteamAccountSwitcher2"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
-        Title="Steam Account Switcher v2" Height="500" Width="458" MinHeight="350" MinWidth="300" MaxWidth="470" Closing="Window_Closing">
+        Title="Steam Account Switcher v2.1" Height="500" Width="458" MinHeight="350" MinWidth="300" MaxWidth="470" Closing="Window_Closing" Background="White">
+    <!--v2.₁ b ₒ ᵢ-->
     <Grid>
         <DockPanel LastChildFill="True" >
-            <ToolBarTray DockPanel.Dock="Top" >
+            <ToolBarTray DockPanel.Dock="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" >
                 <ToolBar ToolBarTray.IsLocked="True">
                     <Button x:Name="buttonAdd" Click="buttonAdd_Click">
                         <StackPanel Orientation="Horizontal">
@@ -24,21 +25,22 @@
                         </StackPanel>
                     </Button>
                     <Button Content="Export" ToolBar.OverflowMode="Always" />
+
                 </ToolBar>
-                <ToolBar ToolBarTray.IsLocked="True" >
+                <!---<ToolBar ToolBarTray.IsLocked="True" >
                     <Button >
                         <StackPanel Orientation="Horizontal">
                             <Image Source="images/lock.png" />
                             <TextBlock Margin="3,0,0,0">Authenticator</TextBlock>
                         </StackPanel>
                     </Button>
-                </ToolBar>
+                </ToolBar> -->
                 <ToolBar ToolBarTray.IsLocked="True">
                     <Button Name="settingsButton" Click="settingsButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="images/gear.png" />
-                        <TextBlock Margin="3,0,0,0">Settings</TextBlock>
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="images/gear.png" />
+                            <TextBlock Margin="3,0,0,0">Settings</TextBlock>
+                        </StackPanel>
                     </Button>
                 </ToolBar>
             </ToolBarTray>
@@ -57,24 +59,23 @@
                     <Label Name="statusBarLabel">Statusbar</Label>
                 </StackPanel>
             </StatusBar>
-            
+
 
             <Grid>
-                <!--             
                 <Grid Background="White" VerticalAlignment="Top" Height="70">
-                <Grid VerticalAlignment="Top" Height="70" >
-                    <Grid.Background>
-                        <ImageBrush ImageSource="images/sas_acc_bg.png" AlignmentX="Left" Stretch="UniformToFill">
-                            <ImageBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.35"/>
-                                    <SkewTransform CenterY="0.5" CenterX="0.35"/>
-                                    <RotateTransform CenterY="0.5" CenterX="0.35"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </ImageBrush.RelativeTransform>
-                        </ImageBrush>
-                    </Grid.Background>
+                    <Grid VerticalAlignment="Top" Height="70" >
+                        <Grid.Background>
+                            <ImageBrush ImageSource="images/sas_acc_bg.png" AlignmentX="Left" Stretch="UniformToFill">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.35"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.35"/>
+                                        <RotateTransform CenterY="0.5" CenterX="0.35"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Grid.Background>
 
                         <StackPanel HorizontalAlignment="Stretch" Margin="90,0,0,0">
 
@@ -93,11 +94,10 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
--->
                 <ListView x:Name="listBoxAccounts" Padding="-6,0,-6,0"
                           dd:DragDrop.IsDragSource="True"
                           dd:DragDrop.IsDropTarget="True"
-                          dd:DragDrop.UseDefaultDragAdorner="True" SelectionChanged="listBoxAccounts_SelectionChanged" MouseDoubleClick="listBoxAccounts_MouseDoubleClick">
+                          dd:DragDrop.UseDefaultDragAdorner="True" SelectionChanged="listBoxAccounts_SelectionChanged" MouseDoubleClick="listBoxAccounts_MouseDoubleClick" Grid.ColumnSpan="2">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Background="White" VerticalAlignment="Top" Height="50" Margin="0">
@@ -147,7 +147,7 @@
                         </ContextMenu>
                     </ListView.ContextMenu>
                 </ListView>
-                
+
 
 
             </Grid>
